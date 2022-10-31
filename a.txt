@@ -1,3 +1,7 @@
 
+<<<<<<< HEAD
 safadsf
 master
+git branch hot_fix
+hot fix
+
