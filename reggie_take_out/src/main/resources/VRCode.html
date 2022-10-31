@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div style="width: 90%; margin: 20px auto;">
+  <p class="orderinfo">订单提交成功，请尽快付款！订单号：<%=Order.orderstrid %><span class="right">应付金额<b class="money"><%=Order.totalmoney.ToString("n2") %></b>元</span></p>
+  <div>
+    <div class="payment">
+      <!-- 微信支付 -->
+      <div class="pay-weixin">
+        <div class="p-w-hd">微信支付</div>
+        <div class="p-w-bd" style="position: relative">
+          <div class="j_weixinInfo" style="position:absolute; top: -36px; left: 130px;">距离二维码过期还剩<span class="j_qrCodeCountdown font-bold font-red">44</span>秒，过期后请刷新页面重新获取二维码。</div>
+          <div class="j_weixinInfo font-red" style="position: absolute; top: -36px; left: 130px;">二维码已过期，<a href="javascript:getWeixinImage2();">刷新</a>页面重新获取二维码。</div>
+          <div class="p-w-box">
+            <div class="pw-box-hd">
+              <img id="weixinImageUrl" src="//img30.360buyimg.com/jr_image/jfs/t2893/157/4205885241/62385/951af5d5/57b51ea9Nb862ca5e.png" width="298" height="298" />
+            </div>
+            <div class="pw-retry j_weixiRetry" style="display: none;">
+              <a class="ui-button ui-button-gray j_weixiRetryButton" href="javascript:getWeixinImage2();">获取失败 点击重新获取二维码  </a>
+            </div>
+            <div class="pw-box-ft">
+              <p>请使用微信扫一扫</p>
+              <p>扫描二维码支付</p>
+            </div>
+          </div>
+          <div class="p-w-sidebar"></div>
+        </div>
+      </div>
+      <!-- 微信支付 end -->
+      <!-- payment-change 变更支付方式 -->
+      <div class="payment-change" style="display:none;">
+        <a class="pc-wrap" οnclick="window.history.go(-1)">
+          <i class="pc-w-arrow-left"><</i>
+          <strong></strong>
+        </a>
+      </div>
+      <!-- payment-change 变更支付方式 end -->
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+</html>
