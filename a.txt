@@ -1,5 +1,4 @@
-
-<<<<<<< HEAD
+内容更改
 safadsf
 master
 git branch hot_fix
