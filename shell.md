@@ -140,7 +140,61 @@ root     10679 10672  0 09:47 pts/1    00:00:00 -bash
 
 ```
 
+## bash内置命令
 
+* echo：
+
+  ```shell
+  -n 不换行输出
+  -e 解析特殊符号
+      \n换行
+      \r回车
+      \t制表符
+      \b退格
+  ```
+
+  ```shell
+  will@will-virtual-machine:~$ echo 你真胖;echo 你好挺可爱
+  你真胖
+  你好挺可爱
+  will@will-virtual-machine:~$ echo -n 你真胖;echo 你挺可爱的
+  你真胖你挺可爱的
+  will@will-virtual-machine:~$ echo -e "我\n是\n猪"
+  我
+  是
+  猪
+  will@will-virtual-machine:~$ echo -e '我\n是\n猪'
+  我
+  是
+  猪
+  ```
+
+* printf
+
+  和c中语法差不多
+
+* eval 命令1;命令2
+
+  用一个进程执行多个命令
+
+* exec
+
+  执行命令之后自动exit
+
+* exit
+
+  结束当前进程
+
+* su
+
+  切换进程到指定用户
+
+  ```shell
+  su - will：切换到will用户
+  sudo su：切换到超级用户
+  ```
+
+  
 
 # 运算符
 
