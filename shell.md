@@ -114,6 +114,30 @@ $@：命令的所有参数
 
 $* $@区别：$*将参数连带空格当做一个整体，$@将参数之间以空格划分
 
+```shell
+name= lyuchao"#该变量的值，有索引，分别是从0，1，2，3，4开始
+${变量}
+返回变量值
+${#name}
+返回变量长度，字符长度--------
+${变量:start}
+返回变量start数值之后的字符，且包含start的数字
+${变量:start: length}
+提取start之后的length限制的字符，例如${name :4 : 1}
+${变量#word}
+从变量开头删除最短匹配的word子串
+${变量##word}
+从变量开头，删除最长匹配的word
+${变量%word}
+从变量结尾删除最短的word
+${变量%%word}
+从变量结尾开始删除最长匹配的word
+${变量/pattern/string}用string代替第一个匹配的pattern${变量//pattern/string}用string代替所有的pattern
+
+```
+
+
+
 # bash
 
 bash是一个命令处理器，能直接执行命令，也能从文件中读取linux命令，这个文件称为脚本
