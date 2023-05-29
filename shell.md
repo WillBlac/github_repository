@@ -218,6 +218,30 @@ root     10679 10672  0 09:47 pts/1    00:00:00 -bash
   sudo su：切换到超级用户
   ```
 
+* time
+
+  记录命令运行时间
+
+  ```shell
+  will@will-virtual-machine:~$ time for n in {1..1000};do char='seq -s "chaoge" 100';echo ${#char} &>/dev/null;done
+  
+  
+  real	0m0.011s
+  user	0m0.011s
+  sys	0m0.000s
+  will@will-virtual-machine:~$ time for n in {1..1000};do char='seq -s "chaoge" 100';echo ${char} | wc - L &>/dev/null;done
+  
+  real	0m0.960s
+  user	0m0.854s
+  sys	0m0.420s
+  will@will-virtual-machine:~$ time for n in {1..1000};do char='seq -s "chaoge" 100';expr length "${char}" &>/dev/null;done
+  
+  real	0m0.640s
+  user	0m0.449s
+  sys	0m0.263s
+  
+  ```
+
   
 
 # 运算符
