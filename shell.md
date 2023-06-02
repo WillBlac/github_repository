@@ -34,7 +34,7 @@ echo "hellow world"
 
 3. 在脚本的路径前加“.”或者source
 
-   本质是在当前shell中执行脚本，所有变量存在当前shell中
+   本质是在**当前**shell中执行脚本，所有变量存在**当前**shell中
 
 # 变量
 
@@ -129,12 +129,39 @@ ${变量#word}
 ${变量##word}
 从变量开头，删除最长匹配的word
 ${变量%word}
-从变量结尾删除最短的word
+从变量结尾删除最短的word，如果结尾第一个字符就不匹配，那就不往下匹配了
 ${变量%%word}
 从变量结尾开始删除最长匹配的word
-${变量/pattern/string}用string代替第一个匹配的pattern${变量//pattern/string}用string代替所有的pattern
+${变量/pattern/string}用string代替第一个匹配的pattern
+	例子：
+		will@will-virtual-machine:~$ name="i am $?"
+		will@will-virtual-machine:~$ echo ${name/i/you}
+		you am 0
+${变量//pattern/string}用string代替所有的pattern
 
 ```
+
+## 扩展变量
+
+* ${parameter:-word}
+
+  如果parameter为空，返回word字符
+
+* ${parameter:=word}
+
+  如果parameter为空，用word代替变量值，并返回其值
+
+* ${parameter:?word}
+
+  如果为空，word当stderr输出，否则输出变量值
+
+* ${parameter:+word}
+
+  如果为空，则什么都不做，否则返回word
+
+
+
+
 
 
 
@@ -240,27 +267,34 @@ root     10679 10672  0 09:47 pts/1    00:00:00 -bash
   user	0m0.449s
   sys	0m0.263s
   
-  ```
-
+  will@will-virtual-machine:~$ time for n in {1..1000};do char='seq -s "chaoge" 100';echo ${char} | awk '{print length($0)}' &> /dev/null;done
   
+  real	0m0.865s
+  user	0m0.770s
+  sys	0m0.367s
+  
+  ```
+  
+* 
 
-# 运算符
 
-* expr运算式
 
-  * 
 
-  expr + - \\* / % 分别对应加、减、乘、除、取余 
 
-  注意：运算符左右两侧必须有空格
+# 特殊符号
 
-  运算的嵌套
+${vars}：取出变量结果
 
-  expr 'expr 2 + 3' \\* 4：先算2+3再算*4
+$()：先执行括号中的命令，得到结果之后交给$()的外部命令，如果没有外部命令，就会报错，和``用法相同
 
-* $[]运算式
+例如:
 
-  []里面对空格不严格要求
+```shell
+echo "现在是$(whoami)登录"     #不报错
+$(whoami)                    #报错
+```
+
+
 
 # 条件判断
 
@@ -306,13 +340,15 @@ root     10679 10672  0 09:47 pts/1    00:00:00 -bash
 
 # for循环
 
+```shell
 for((i=1; i<=100; i++))
 
 do
 
-​	statement
+  statement
 
 done
+```
 
 例子：
 
@@ -342,6 +378,16 @@ done
   6     echo "hello $i"
   7 done
 ```
+
+
+
+* 批量修改文件名
+
+  ```shell
+  will@will-virtual-machine:/opt/sub_str$ for file_name in `ls *fin*jpg`;do mv $file_name `echo ${file_name//_finished/}`;done
+  ```
+
+  
 
 # read读取控制台输入数据
 
