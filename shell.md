@@ -300,22 +300,59 @@ $(whoami)                    #报错
 
 # 运算符
 
-((运算式)) 
+* ((运算式)) 
 
-例如:((2+3))
+  例如:((2+3))
 
-若想打印出结果需要echo $((2+3))
+  若想打印出结果需要echo $((2+3))
 
-```shell
-echo $((num*3)) #输出num*3,num本身值不会变
-echo $((num=num*3))#num值会变
-```
+  ```shell
+  echo $((num*3)) #输出num*3,num本身值不会变
+  echo $((num=num*3))#num值会变
+  ```
+
+  echo((num=num*3))：
+
+* expr:
+
+  expr以空格区分输入，并且需要将加减乘除转义一下，告诉expr加减乘除符号没有其他特殊含义
+
+  ```shel
+  will@will-virtual-machine:/opt/shell$ expr 5 \+ 3
+  8
+  will@will-virtual-machine:/opt/shell$ expr 5 \* 3
+  15
+  will@will-virtual-machine:/opt/shell$ expr 5 \/ 3
+  1
+  will@will-virtual-machine:/opt/shell$ expr 5 \- 3
+  2
+  will@will-virtual-machine:/opt/shell$ expr length 123456
+  6
+  will@will-virtual-machine:/opt/shell$ expr 123 \> 456
+  0
+  
+  ```
+
+  * 匹配长度
+
+    expr 字符串 ":" ".*"
+
+    冒号“：”意思是匹配，“.*”意思是将前面的字符串全匹配
+
+    ```shell
+    will@will-virtual-machine:/opt/shell$ expr yc.png ":" ".*"
+    6
+    will@will-virtual-machine:/opt/shell$ expr yc.png ":" ".*j"
+    0
+    will@will-virtual-machine:/opt/shell$ expr yc.png ":" ".*png"
+    6
+    will@will-virtual-machine:/opt/shell$ expr yc.pngggggggggggg ":" ".*png"
+    6
+    ```
+
+    
 
 
-
-
-
-echo((num=num*3))：
 
 # 条件判断
 
@@ -503,6 +540,52 @@ mybash.sh
 输出
 
 3
+
+
+
+# 第一个脚本
+
+```shell
+#! /bin/bash
+
+print_usage(){
+
+
+	echo "you can only put numbers"
+
+	exit 2
+}
+
+
+read -p "Please input your number:" firstnum
+
+if [ -n "`echo $firstnum | sed 's/[0-9]//g'`" ]
+	then
+		print_usage
+fi
+
+read -p "please input your operator:" operator
+
+if [ "${operator}" != "+" ] && [ "${operator} != "-" ] && [ "${operator}  != "*" ] && [ "${operator}" != "/" ]
+	then
+		echo "you can just input operators"
+		exit 2
+fi
+
+read -p "Please input your number:" secondnum
+
+if [ -n "`echo $secondnum | sed 's/[0-9]//g'`" ]
+	then
+		print_usage
+fi
+
+echo "the answer of ${firstnum}${operator}${secondnum} is $((${firstnum}${operator}${secondnum}))"
+
+```
+
+
+
+
 
 # cut
 
